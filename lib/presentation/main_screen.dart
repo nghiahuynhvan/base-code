@@ -64,9 +64,11 @@ class _MainScreenState extends State<MainScreen> {
           selectedFontSize: 12.0,
           currentIndex: _calculateSelectedIndex(context).indexTab,
           onTap: _onTap,
-          items:  [
-            BottomNavigationBarItem(icon: const Icon(Icons.ad_units), label: SLang.current.home),
-            BottomNavigationBarItem(icon:const  Icon(Icons.person), label: 'You'),
+          items: [
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.ad_units), label: SLang.current.home),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.person), label: SLang.current.you),
           ],
         ),
       ),

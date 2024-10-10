@@ -1,5 +1,6 @@
 import 'package:code_base/core/routing/routing_path.dart';
 import 'package:code_base/presentation/home_page/home_page.dart';
+import 'package:code_base/presentation/login_page/login_page.dart';
 import 'package:code_base/presentation/you_page/you_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -30,6 +31,10 @@ class AppRouter {
       GoRoute(
         path: Routers.splash,
         builder: (_, __) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: Routers.login,
+        builder: (_, __) => const LoginPage(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navShell) => MainScreen(navShell: navShell),

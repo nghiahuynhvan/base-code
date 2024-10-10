@@ -6,7 +6,6 @@ enum BottomNavMainScreen {
   /// You Tab
   you(1);
 
-
   const BottomNavMainScreen(this.indexTab);
 
   /// Tab index

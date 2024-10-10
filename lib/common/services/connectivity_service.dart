@@ -4,7 +4,7 @@ import 'package:code_base/core/locators/locators.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 ///[ConnectivityService] is class get status current of connection
-///divice with the Internet
+///device with the Internet
 class ConnectivityService {
   final _diConnect = diConnectivity;
 

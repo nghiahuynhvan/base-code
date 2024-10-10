@@ -37,7 +37,7 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
     // AppStatus.setStatusAppAlreadyInside(isReadyInside: true);
     // await diAuthServiceable.initialize();
     print('>>>>>>>home');
-    AppRouter.rootNavigationState.currentState?.context.go(Routers.home);
+    AppRouter.rootNavigationState.currentState?.context.go(Routers.login);
   }
 
   void _moveToApp(SplashMoveToApp event, Emitter emit) {
@@ -45,12 +45,9 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
   }
 
   void _timerTicked(_SplashTimerTicked event, Emitter emit) {
-    print("11111111");
     if (event.duration > 10) {
-      print("222222");
       emit(SplashRunInProgress(event.duration));
     } else {
-      print("333333");
       emit(const SplashComplete());
     }
   }
