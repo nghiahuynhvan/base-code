@@ -37,32 +37,50 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(body:
         BlocBuilder<LoginPageBloc, LoginPageState>(builder: (context, state) {
       if (state is LoginPageLoadedState) {
-        print('>>>>>>>${state}');
         return SafeArea(
-          minimum: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-          child: Container(
-            color: AppColors.backgroundColor,
+          minimum: EdgeInsets.symmetric(horizontal: 8.w),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.w),
-                    color: Colors.red,
+                TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.white, width: 2.0),
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.white, width: 2.0),
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
                   ),
-                  child: TextFormField(
-                    controller: emailController,
-                  ),
+                  maxLines: null,
+                  style: AppTextStyle.medium16.copyWith(color: Colors.black),
+                  onFieldSubmitted: (value) {
+                    print('>>>>${value}');
+                  },
+                  onEditingComplete: () {},
+                  controller: emailController,
                 ),
                 SizedBox(
                   height: 12.h,
                 ),
                 TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                  obscureText: true,
                   controller: passController,
                 ),
                 SizedBox(
                   height: 12.h,
                 ),
                 ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                    ),
                     onPressed: () {
                       diLoginPageBloc.add(
                         LoginPageSubmitEvent(
@@ -72,11 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                       );
                     },
                     child: Container(
-                      color: Colors.blue,
                       child: Text(
                         'submit',
-                        style: AppTextStyle.medium14
-                            .copyWith(color: AppColors.backgroundColor),
+                        style: AppTextStyle.medium16
+                            .copyWith(color: AppColors.primaryColor),
                       ),
                     ))
               ],
