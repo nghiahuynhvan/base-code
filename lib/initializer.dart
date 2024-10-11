@@ -26,7 +26,6 @@ class Initializer {
       //set up firebase
       await Firebase.initializeApp();
 
-
       runApp();
     }, (error, stack) {
       AppLogger.instance.d('runZonedGuarded: ${error.toString()}');

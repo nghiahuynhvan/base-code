@@ -4,6 +4,7 @@ import 'package:code_base/presentation/login_page/login_page_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../core/style/app_colors.dart';
 
@@ -18,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
+  bool _passwordVisible = true;
 
   @override
   void initState() {
@@ -43,24 +45,32 @@ class _LoginPageState extends State<LoginPage> {
             physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
+                SizedBox(
+                  height: 8.h,
+                ),
                 TextFormField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
+                    focusColor: Colors.black,
+                    border: InputBorder.none,
+                    enabledBorder: OutlineInputBorder(
                       borderSide:
-                          const BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius: BorderRadius.circular(25.0),
+                          const BorderSide(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(12.w),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(12.w),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                          const BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius: BorderRadius.circular(25.0),
+                          const BorderSide(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(12.w),
                     ),
                   ),
                   maxLines: null,
                   style: AppTextStyle.medium16.copyWith(color: Colors.black),
-                  onFieldSubmitted: (value) {
-                    print('>>>>${value}');
-                  },
+                  onFieldSubmitted: (value) {},
                   onEditingComplete: () {},
                   controller: emailController,
                 ),
@@ -68,10 +78,44 @@ class _LoginPageState extends State<LoginPage> {
                   height: 12.h,
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                  obscureText: _passwordVisible,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        // Based on passwordVisible state choose the icon
+                        _passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      onPressed: () {
+                        // Update the state i.e. toogle the state of passwordVisible variable
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
+                    ),
+                    focusColor: Colors.black,
+                    border: InputBorder.none,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(12.w),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(12.w),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(12.w),
+                    ),
                   ),
-                  obscureText: true,
+                  style: AppTextStyle.medium16.copyWith(color: Colors.black),
+                  onFieldSubmitted: (value) {},
+                  onEditingComplete: () {},
                   controller: passController,
                 ),
                 SizedBox(

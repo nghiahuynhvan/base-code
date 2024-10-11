@@ -1,3 +1,4 @@
+import 'package:code_base/common/services/app_status_service.dart';
 import 'package:code_base/core/routing/app_router.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,13 +25,21 @@ class LoginPageBloc extends Bloc<LoginPageEvent, LoginPageState> {
 
   void _onSubmit(LoginPageSubmitEvent event, Emitter emit) async {
     try {
+      // AppStatus.showLoading();
       final userCritial = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: event.email, password: event.password);
-      final abc = userCritial.user?.getIdToken(true);
-      print('>>>>Token: ${abc.toString()}');
-      print('${userCritial.user!.email}');
-      _movetoHome(event.context);
+      final user = userCritial.user;
+      if(user != null) {
+        final abc = user.getIdToken(true);
+        if(abc.toString().isNotEmpty)
+          {
+            print('>>>>Token: ${ await abc}');
+
+            _movetoHome(event.context);
+            AppStatus.dismissLoading();
+          }
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
